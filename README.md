@@ -1,63 +1,28 @@
-# Bayanaa Father-Style Chess Bot
+# bayanjargal_bot — Bayanaa2020 style
+
+This folder is configured for the existing Windows Start-bot workflow.
 
 ## 1. Install
-
-```bash
+```bat
 pip install -r requirements.txt
 ```
 
-Install Stockfish and make sure `stockfish` is in PATH, or set:
-
-```bash
-export STOCKFISH_PATH=/path/to/stockfish
+## 2. Configure
+Open `start_bot.bat` and replace:
+```bat
+set "LICHESS_TOKEN=PASTE_YOUR_LICHESS_TOKEN_HERE"
 ```
+with the token of the `bayanjargal_bot` account.
 
-## 2. Build the style model
+Keep the token out of GitHub.
 
-Put the PGN next to the scripts:
+## 3. Run
+Double-click `start_bot.bat`.
 
-```bash
-python build_style.py lichess_Bayanaa2020_2026-09-14.pgn
-```
+The bot uses:
+- `bayanaa_style_1000.json` — profile built from Bayanaa2020 games 1–1000
+- `stockfish.exe` — Stockfish engine
+- `bot.py` — Lichess bot logic
 
-This creates:
-
-```text
-bayanaa_style.json
-```
-
-## 3. Run the bot
-
-Set the Lichess bot token:
-
-Linux/macOS:
-```bash
-export LICHESS_TOKEN="YOUR_TOKEN"
-python bot.py
-```
-
-Windows PowerShell:
-```powershell
-$env:LICHESS_TOKEN="YOUR_TOKEN"
-python bot.py
-```
-
-## Tuning
-
-Default target:
-```text
-TARGET_ELO=1900
-```
-
-Useful environment variables:
-
-- `TARGET_ELO=1850` to `1930`
-- `THINK_TIME=0.65`
-- `MULTIPV=8`
-- `STYLE_WEIGHT=0.72`
-- `STOCKFISH_PATH=/path/to/stockfish`
-
-## Important
-
-The builder learns only moves belonging to BAYANAA_USERNAME (default: Bayanaa2020). Override with BAYANAA_USERNAME=your_username.
-The engine Elo is only a strength limit; actual Lichess rating must be measured through games.
+## Notes
+This is a Stockfish + learned-move-distribution style bot, not a neural network clone.
